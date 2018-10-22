@@ -1,5 +1,4 @@
-import { injectGlobal } from 'styled-components';
-
+ import { injectGlobal } from 'styled-components';
 injectGlobal`
 	html, body, div, span, applet, object, iframe,
 	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
