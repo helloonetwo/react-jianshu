@@ -1,5 +1,5 @@
 import  React ,{Component}  from 'react'
-// import { CSSTransition } from 'react-transition-group';
+import { connect }  from  'react-redux'
 import  {
   HeaderWrapper,
   Logo,
@@ -11,14 +11,6 @@ import  {
   SearchWrapper
 }  from  './style'
 class   Header   extends   Component {
-  constructor(props) {
-     super(props);
-     this.state = {
-       focused:false
-     }
-     this.handleInputFocus =  this.handleInputFocus.bind(this);
-     this.handleInputBlur  =  this.handleInputBlur.bind(this);
-  }
     render () {
        return  (
            <HeaderWrapper >
@@ -37,12 +29,12 @@ class   Header   extends   Component {
         							className="slide"
         						> */}
         							<NavSearch
-        								className={this.state.focused ? 'focused': ''}
-        								onFocus={this.handleInputFocus}
-        								onBlur={this.handleInputBlur}
+        								className={this.props.focused ? 'focused': ''}
+        								onFocus={this.props.handleInputFocus}
+        								onBlur={this.props.handleInputBlur}
         							></NavSearch>
 
-        						<i className={this.state.focused ? 'focused iconfont zoom': 'iconfont zoom'}>
+        						<i className={this.props.focused ? 'focused iconfont zoom': 'iconfont zoom'}>
         							&#xe614;
         						</i>
         					</SearchWrapper>
@@ -57,15 +49,26 @@ class   Header   extends   Component {
            </HeaderWrapper>
        )
     }
-    handleInputFocus () {
-      this.setState({
-         focused : true
-      })
-    }
-    handleInputBlur () {
-      this.setState ({
-          focused :false
-      })
-    }
 }
-export  default  Header;
+const   mapStateToProps = (state) => {
+  return {
+    focused: state.focused
+  }
+}
+const  mapDispatchToProps = (dispatch,ownProps) => {
+   return {
+        handleInputFocus () {
+            const  action = {
+              type:'focus'
+            };
+        dispatch(action);
+      },
+      handleInputBlur () {
+        const  action = {
+           type : 'blur'
+        };
+        dispatch (action);
+      }
+   }
+}
+export  default  connect( mapStateToProps,mapDispatchToProps )(Header);
