@@ -3,7 +3,10 @@ import  {
   HeaderWrapper,
   Logo,
   Nav,
-  NavItem
+  NavItem,
+  NavSearch,
+  Addition,
+  Button
 }  from  './style'
 class   Header   extends   Component {
     render () {
@@ -15,7 +18,12 @@ class   Header   extends   Component {
                   <NavItem  className="left">下载</NavItem>
                   <NavItem  className="right">登陆</NavItem>
                   <NavItem  className="right">Aa</NavItem>
+                  <NavSearch></NavSearch>
                </Nav>
+               <Addition>
+                 <Button className="writting">写文章</Button>
+                  <Button className="reg">注册</Button>
+               </Addition>
            </HeaderWrapper>
        )
     }
